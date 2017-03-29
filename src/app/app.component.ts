@@ -5,6 +5,7 @@ import { LocationTracker } from '../providers/location-tracker';
 import { MovieListPage } from '../pages/movie-list/movie-list';
 
 
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -17,6 +18,14 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
       Splashscreen.hide();
+//      locationTracker.startTracking();
+      //LocationTracker.startTracking();
+      
+   
+          
+    
+      
+      
     });
   }
 }

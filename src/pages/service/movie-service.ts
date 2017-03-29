@@ -1,5 +1,6 @@
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
+import { LocationTracker } from '../../providers/location-tracker';
  
 export class MovieService {  
     static get parameters() {
@@ -16,8 +17,8 @@ export class MovieService {
 		return response;
     }
     
-    searchWiki() {
-        var gscoord='37.786952|-122.399523'
+    searchWiki(gscoord) {
+//        var gscoord=locationTracker.lat+'|'+ locationTracker.lng;
 //        var gscoord='38.8958120|-77.0759770' # Key blvd
         var gsradius=1000
         var gslimit=10

@@ -25,21 +25,23 @@ export class LocationTracker {
         interval: 2000 
       };
      
-      BackgroundGeolocation.configure((location) => {
-     
-        console.log('BackgroundGeolocation:  ' + location.latitude + ',' + location.longitude);
-     
-        // Run update inside of Angular's zone
-        this.zone.run(() => {
-          this.lat = location.latitude;
-          this.lng = location.longitude;
-        });
-     
-       }, (err) => {
-     
-        console.log(err);
-     
-      }, config);
+      
+      BackgroundGeolocation.configure(config)
+//      BackgroundGeolocation.configure((location) => {
+//     
+//        console.log('BackgroundGeolocation:  ' + location.latitude + ',' + location.longitude);
+//     
+//        // Run update inside of Angular's zone
+//        this.zone.run(() => {
+//          this.lat = location.latitude;
+//          this.lng = location.longitude;
+//        });
+//     
+//       }, (err) => {
+//     
+//        console.log(err);
+//     
+//      }, config);
      
       // Turn ON the background-geolocation system.
       BackgroundGeolocation.start();
@@ -48,8 +50,10 @@ export class LocationTracker {
       // Foreground Tracking
      
       let options = {
-        frequency: 3000, 
-        enableHighAccuracy: true
+        frequency: 1000, 
+        enableHighAccuracy: false,
+        maxWait: 30
+        
       };
      
       this.watch = Geolocation.watchPosition(options).filter((p: any) => p.code === undefined).subscribe((position: Geoposition) => {
@@ -63,7 +67,11 @@ export class LocationTracker {
         });
      
       });
-     
+//      return deferred.promise();
+//      this._callback();
+//      return true;
+      
+//      Return true;
     }
  
   stopTracking() {

@@ -13,13 +13,39 @@ import { LocationTracker } from '../../providers/location-tracker';
 export class MovieListPage {
 
 	movies: Array<any>;
+    coordinates = "";
 
 	constructor(public navCtrl: NavController, private movieService: MovieService, public locationTracker: LocationTracker) {
 
 	}
+	ionViewDidEnter(){
+	    
+	    
+	    this.start();    
+	    console.log("cem");
+//	    this.searchMovieDB();
+	
+	}
+	
   
 	start(){
-	    this.locationTracker.startTracking();
+	     this.locationTracker.startTracking();
+//	     .success(function () {
+	         this.searchMovieDB();
+//	       });
+	     
+//	         //success handler function
+//	         this.searchMovieDB();
+//	     },function(error){
+//	   //error handler function    
+//	         console.log("I HAD an ERROR")
+//	   });
+	             
+	             
+//	             this.searchMovieDB());
+
+	     
+	    
 	}
 	 
 	stop(){
@@ -28,24 +54,35 @@ export class MovieListPage {
 	
 	
 	
-	searchMovieDB(event, key) {
-		console.log(event.target.value);
-		if(event.target.value.length > 2) {
+	searchMovieDB() {
+//		console.log(event.target.value);
+//		if(event.target.value.length > 2) {
 		    
 //	          this.movieService.searchWiki(event.target.value).subscribe(
-			this.movieService.searchWiki().subscribe(
-				data => {
-				    
-			        console.log(data)
-					this.movies = data.query.geosearch; 
-					console.log(this.movies);
-				},
-				err => {
-					console.log(err);
-				},
-				() => console.log('Wiki Search Complete')
-			);
-		}
+	    console.log(this.locationTracker);
+//	    while (this.locationTracker.lng == 0){
+//	        setTimeout('', 5000);
+//	        console.log("waiting for geodata")
+//	     
+//	    }
+	    
+	    var gscoord=this.locationTracker.lat+'|'+ this.locationTracker.lng;
+	    console.log("These are my coordinates:" + gscoord)
+	    
+	    
+		this.movieService.searchWiki(gscoord).subscribe(
+			data => {
+			    
+		        console.log(data)
+				this.movies = data.query.geosearch; 
+				console.log(this.movies);
+			},
+			err => {
+				console.log(err);
+			},
+			() => console.log('Wiki Search Complete')
+		);
+//		}
 	}   
 	
 	
